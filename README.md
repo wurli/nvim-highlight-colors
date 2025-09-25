@@ -6,13 +6,18 @@
 
 > Highlight colors within Neovim
 
-<img width="640" src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/d99a800c-0ea9-44f9-bc1c-986236adf44a" alt="Background highlights for hex, rgb, hsl, named colors, and CSS variables" />
+<img width="640"
+    src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/d99a800c-0ea9-44f9-bc1c-986236adf44a"
+    alt="Background highlights for hex, rgb, hsl, named colors, and CSS
+    variables" />
 
 ## Features
 
 - Realtime color highlighting
 - Supports hex, rgb, hsl, CSS variables, and Tailwind CSS
-- LSP support! For any LSP that supports `textDocument/documentColor` like [tailwindcss](https://github.com/tailwindlabs/tailwindcss-intellisense) and [csslsp](https://github.com/microsoft/vscode-css-languageservice)
+- LSP support! For any LSP that supports `textDocument/documentColor` like
+  [tailwindcss](https://github.com/tailwindlabs/tailwindcss-intellisense) and
+  [csslsp](https://github.com/microsoft/vscode-css-languageservice)
 - Multiple rendering modes: background, foreground, and virtual text
 
 ## Usage
@@ -59,7 +64,10 @@ require("cmp").setup({
 
 #### `lspkind` integration
 
-The out of the box `format` function does not necessarily play nicely with `lspkind` and potentially other formatters provided by plugins and may require manual intervention. Here is an example of making the integration work nicely with `lspkind`:
+The out of the box `format` function does not necessarily play nicely with
+`lspkind` and potentially other formatters provided by plugins and may require
+manual intervention. Here is an example of making the integration work nicely
+with `lspkind`:
 
 ```lua
 require("cmp").setup({
@@ -132,56 +140,59 @@ require("blink.cmp").setup {
 
 ```lua
 require("nvim-highlight-colors").setup {
-    ---Render style
-    ---@usage 'background'|'foreground'|'virtual'
+    -- Render style
+    -- @usage 'background'|'foreground'|'virtual'
     render = 'background',
 
-    ---Set virtual symbol (requires render to be set to 'virtual')
+    -- Set virtual symbol (requires render to be set to 'virtual')
     virtual_symbol = '■',
 
-    ---Set virtual symbol suffix (defaults to '')
+    -- Set virtual symbol suffix (defaults to '')
     virtual_symbol_prefix = '',
 
-    ---Set virtual symbol suffix (defaults to ' ')
+    -- Set virtual symbol suffix (defaults to ' ')
     virtual_symbol_suffix = ' ',
 
-    ---Set virtual symbol position()
-    ---@usage 'inline'|'eol'|'eow'
-    ---inline mimics VS Code style
-    ---eol stands for `end of column` - Recommended to set `virtual_symbol_suffix = ''` when used.
-    ---eow stands for `end of word` - Recommended to set `virtual_symbol_prefix = ' ' and virtual_symbol_suffix = ''` when used.
+    -- Set virtual symbol position()
+    -- @usage 'inline'|'eol'|'eow'
+    -- "inline" mimics VS Code style
+    -- "eol" stands for "end of column"
+    --   (When using this setting we also recommend using `virtual_symbol_suffix = ''`)
+    -- "eow" stands for "end of word"
+    --   (when using this setting we also recommend using `virtual_symbol_prefix = ' '`
+    --   and `virtual_symbol_suffix = ''`)
     virtual_symbol_position = 'inline',
 
-    ---Highlight hex colors, e.g. '#FFFFFF'
+    -- Highlight hex colors, e.g. '#FFFFFF'
     enable_hex = true,
 
-    ---Highlight short hex colors e.g. '#fff'
+    -- Highlight short hex colors e.g. '#fff'
     enable_short_hex = true,
 
-    ---Highlight rgb colors, e.g. 'rgb(0 0 0)'
+    -- Highlight rgb colors, e.g. 'rgb(0 0 0)'
     enable_rgb = true,
 
-    ---Highlight hsl colors, e.g. 'hsl(150deg 30% 40%)'
+    -- Highlight hsl colors, e.g. 'hsl(150deg 30% 40%)'
     enable_hsl = true,
 
-    ---Highlight ansi colors, e.g '\033[0;34m'
+    -- Highlight ansi colors, e.g '\033[0;34m'
     enable_ansi = true,
 
     -- Highlight hsl colors without function, e.g. '--foreground: 0 69% 69%;'
     enable_hsl_without_function = true,
 
-    ---Highlight CSS variables, e.g. 'var(--testing-color)'
+    -- Highlight CSS variables, e.g. 'var(--testing-color)'
     enable_var_usage = true,
 
-    ---Highlight named colors, e.g. 'green'
+    -- Highlight named colors, e.g. 'green'
     enable_named_colors = true,
 
-    ---Highlight tailwind colors, e.g. 'bg-blue-500'
+    -- Highlight tailwind colors, e.g. 'bg-blue-500'
     enable_tailwind = false,
 
-    ---Set custom colors
-    ---Label must be properly escaped with '%' to adhere to `string.gmatch`
-    --- :help string.gmatch
+    -- Set custom colors
+    -- Label must be properly escaped with '%' to adhere to `string.gmatch`
+    --  :help string.gmatch
     custom_colors = {
         { label = '%-%-theme%-primary%-color', color = '#0f1219' },
         { label = '%-%-theme%-secondary%-color', color = '#5a5d64' },
@@ -190,7 +201,10 @@ require("nvim-highlight-colors").setup {
     -- Exclude filetypes or buftypes from highlighting e.g. 'exclude_buftypes = {'text'}'
     exclude_filetypes = {},
     exclude_buftypes = {},
-    -- Exclude buffer from highlighting e.g. 'exclude_buffer = function(bufnr) return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1000000 end'
+    -- Exclude buffer from highlighting e.g:
+    -- exclude_buffer = function(bufnr)
+    --     return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1000000
+    -- end
     exclude_buffer = function(bufnr) end
 }
 ```
@@ -201,15 +215,24 @@ require("nvim-highlight-colors").setup {
 
 **Background**
 
-<img width="640" src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/bf8c0d2d-552c-485a-aeba-b3d281c8c333" alt="Background highlights for named colors, CSS variables, and Tailwind CSS colors" />
+<img width="640"
+    src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/bf8c0d2d-552c-485a-aeba-b3d281c8c333"
+    alt="Background highlights for named colors, CSS variables, and Tailwind CSS
+    colors" />
 
 **Foreground**
 
-<img width="640" src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/4e2e9c7d-552b-4558-ab79-4fe37738f869" alt="Foreground highlights for named colors, CSS variables, and Tailwind CSS colors" />
+<img width="640"
+    src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/4e2e9c7d-552b-4558-ab79-4fe37738f869"
+    alt="Foreground highlights for named colors, CSS variables, and Tailwind CSS
+    colors" />
 
 **Virtual text**
 
-<img width="640" src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/536b16e4-04ad-4ede-95f5-c1855386c294" alt="Virtual text highlights for named colors, CSS variables, and Tailwind CSS colors" />
+<img width="640"
+    src="https://github.com/mvllow/nvim-highlight-colors/assets/1474821/536b16e4-04ad-4ede-95f5-c1855386c294"
+    alt="Virtual text highlights for named colors, CSS variables, and Tailwind
+    CSS colors" />
 
 **nvim-cmp integration**
 
@@ -219,7 +242,7 @@ require("nvim-highlight-colors").setup {
 ## Commands
 
 | Command                     | Description                  |
-| :-------------------------- | :--------------------------- |
+| :-- ----------------------- | :--------------------------- |
 | `:HighlightColors On`       | Turn highlights on           |
 | `:HighlightColors Off`      | Turn highlights off          |
 | `:HighlightColors Toggle`   | Toggle highlights            |
