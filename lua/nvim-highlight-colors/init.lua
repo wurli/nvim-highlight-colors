@@ -212,7 +212,7 @@ end
 
 ---Callback to manually show the highlights
 function M.turn_on()
-	local buffers = vim.fn.getbufinfo({ buflisted = true })
+	local buffers = vim.fn.getbufinfo()
 
 	for _, buffer in ipairs(buffers) do
 		M.refresh_highlights(buffer.bufnr, false)
@@ -223,7 +223,7 @@ end
 
 ---Callback to manually hide the highlights
 function M.turn_off()
-	local buffers = vim.fn.getbufinfo({ buflisted = true })
+	local buffers = vim.fn.getbufinfo()
 
 	for _, buffer in ipairs(buffers) do
 		M.clear_highlights(buffer.bufnr)
@@ -268,6 +268,7 @@ vim.api.nvim_create_autocmd({
 	"TextChangedP",
 	"LspAttach",
 	"BufEnter",
+    "BufWinEnter",
 }, {
 	callback = M.handle_change_autocmd_callback,
 })
