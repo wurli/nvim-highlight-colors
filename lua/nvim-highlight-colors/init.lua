@@ -119,7 +119,8 @@ end
 
 ---Refreshes current highlights within the specified buffer
 ---@param active_buffer_id number
----@param should_clear_highlights boolean Indicates whether the current highlights should be deleted before rendering
+---@param should_clear_highlights boolean Indicates whether the current
+---  highlights should be deleted before rendering
 function M.refresh_highlights(active_buffer_id, should_clear_highlights)
 	local buffer_id = active_buffer_id ~= nil and active_buffer_id or 0
 
@@ -212,10 +213,10 @@ end
 
 ---Callback to manually show the highlights
 function M.turn_on()
-	local buffers = vim.fn.getbufinfo()
+	local buffers = vim.api.nvim_list_bufs()
 
 	for _, buffer in ipairs(buffers) do
-		M.refresh_highlights(buffer.bufnr, false)
+		M.refresh_highlights(buffer, false)
 	end
 
 	is_loaded = true
@@ -223,10 +224,10 @@ end
 
 ---Callback to manually hide the highlights
 function M.turn_off()
-	local buffers = vim.fn.getbufinfo()
+	local buffers = vim.api.nvim_list_bufs()
 
 	for _, buffer in ipairs(buffers) do
-		M.clear_highlights(buffer.bufnr)
+		M.clear_highlights(buffer)
 	end
 
 	is_loaded = false
@@ -246,7 +247,8 @@ function M.is_active()
 	return is_loaded
 end
 
----Autocmd callback to handle changes that require a complete redraw of the highlights (clear current highlights + highlight again)
+---Autocmd callback to handle changes that require a complete redraw of the
+---highlights (clear current highlights + highlight again)
 ---@param props {buf: number}
 function M.handle_change_autocmd_callback(props)
 	if is_loaded then
@@ -254,7 +256,8 @@ function M.handle_change_autocmd_callback(props)
 	end
 end
 
----Autocmd callback to handle changes that do not require a full redraw of the highlights
+---Autocmd callback to handle changes that do not require a full redraw of the
+---highlights
 ---@param props {buf: number}
 function M.handle_autocmd_callback(props)
 	if is_loaded then
@@ -268,7 +271,7 @@ vim.api.nvim_create_autocmd({
 	"TextChangedP",
 	"LspAttach",
 	"BufEnter",
-    "BufWinEnter",
+	"BufWinEnter",
 }, {
 	callback = M.handle_change_autocmd_callback,
 })
@@ -302,8 +305,8 @@ end, {
 return {
 	turnOff = M.turn_off,
 	turnOn = M.turn_on,
-    turn_on = M.turn_on,
-    turn_off = M.turn_off,
+	turn_on = M.turn_on,
+	turn_off = M.turn_off,
 	setup = M.setup,
 	toggle = M.toggle,
 	is_active = M.is_active,
