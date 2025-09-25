@@ -302,6 +302,8 @@ end, {
 return {
 	turnOff = M.turn_off,
 	turnOn = M.turn_on,
+    turn_on = M.turn_on,
+    turn_off = M.turn_off,
 	setup = M.setup,
 	toggle = M.toggle,
 	is_active = M.is_active,
